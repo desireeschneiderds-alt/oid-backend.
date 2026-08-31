@@ -3,23 +3,15 @@ FROM debian:bookworm-slim
 RUN apt-get update && apt-get install -y \
     curl \
     ca-certificates \
-    cabal-install \
-    ghc \
-    alex \
-    happy \
-    libgmp-dev \
-    zlib1g-dev \
-    pkg-config \
+    libgmp10 \
+    zlib1g \
+    nodejs \
+    npm \
     && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /root/.cabal/packages/hackage.haskell.org \
-    && curl -fL https://hackage.haskell.org/root.json -o /root/.cabal/packages/hackage.haskell.org/root.json \
-    && cabal update \
-    && cabal install tttool --allow-newer
-
-ENV PATH="/root/.cabal/bin:${PATH}"
-
-RUN apt-get update && apt-get install -y nodejs npm
+# Lade das fertig kompilierte tttool direkt herunter
+RUN curl -fL https://github.com/brouhaha/tttool/releases/download/v1.9/tttool-x86_64-linux -o /usr/local/bin/tttool \
+    && chmod +x /usr/local/bin/tttool
 
 WORKDIR /app
 COPY package*.json ./
