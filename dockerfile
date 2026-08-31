@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
 RUN mkdir -p /root/.cabal/packages/hackage.haskell.org \
     && curl -fL https://hackage.haskell.org/root.json -o /root/.cabal/packages/hackage.haskell.org/root.json \
     && cabal update \
-    && cabal install tttool
+    && cabal install tttool --allow-newer
 
 ENV PATH="/root/.cabal/bin:${PATH}"
 
