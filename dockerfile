@@ -11,7 +11,8 @@ RUN apt-get update && apt-get install -y \
     zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 
-RUN cabal user-config update -s "secure: False" \
+RUN mkdir -p /root/.cabal/packages/hackage.haskell.org \
+    && curl -fL https://hackage.haskell.org/root.json -o /root/.cabal/packages/hackage.haskell.org/root.json \
     && cabal update \
     && cabal install tttool
 
