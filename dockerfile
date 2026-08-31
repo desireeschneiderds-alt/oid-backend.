@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     happy \
     libgmp-dev \
     zlib1g-dev \
+    pkg-config \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /root/.cabal/packages/hackage.haskell.org \
