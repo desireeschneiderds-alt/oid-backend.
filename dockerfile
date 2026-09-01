@@ -10,9 +10,9 @@ RUN apt-get update && apt-get install -y \
     npm \
     && rm -rf /var/lib/apt/lists/*
 
-RUN curl -fL https://github.com/brouhaha/tttool/releases/download/v1.9/tttool-1.9-x86_64-linux.zip -o /tmp/tttool.zip \
+RUN curl -fL https://github.com/entropia/tip-toi-reveng/releases/download/1.9/tttool-1.9.zip -o /tmp/tttool.zip \
     && unzip /tmp/tttool.zip -d /tmp/ \
-    && mv /tmp/tttool-1.9-x86_64-linux/tttool /usr/local/bin/tttool \
+    && mv /tmp/tttool-1.9/tttool-x86_64-linux /usr/local/bin/tttool \
     && chmod +x /usr/local/bin/tttool \
     && rm -rf /tmp/tttool*
 
