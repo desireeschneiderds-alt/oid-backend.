@@ -1,21 +1,9 @@
-FROM haskell:8.10 AS builder
+FROM alpine:3.19
 
-RUN cabal update
-RUN git clone https://github.com/brouhaha/tttool.git /tmp/tttool \
-    && cd /tmp/tttool \
-    && cabal install --installdir=/build --overwrite-policy=always
-
-FROM debian:bookworm-slim
-
-RUN apt-get update && apt-get install -y \
-    libgmp10 \
-    zlib1g \
+RUN apk add --no-cache \
+    tttool \
     nodejs \
-    npm \
-    && rm -rf /var/lib/apt/lists/*
-
-COPY --from=builder /build/tttool /usr/local/bin/tttool
-RUN chmod +x /usr/local/bin/tttool
+    npm
 
 WORKDIR /app
 COPY package*.json ./
